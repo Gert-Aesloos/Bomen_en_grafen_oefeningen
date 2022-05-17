@@ -45,4 +45,8 @@ public class BinaryTree<E>{
 		throw new UnsupportedOperationException("Should not be implemented, implement in BinarySearchTree file");
 	}
 
+	boolean cleanUp(){
+		throw new UnsupportedOperationException("Should not be implemented, implement in BinarySearchTree file");
+	}
+
 }

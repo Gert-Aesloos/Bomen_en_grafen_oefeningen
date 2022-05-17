@@ -2,7 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 
-public class Graph {
+public class  Graph {
 	private final int[][] gewichtenMatrix;
     private final int inf = Integer.MAX_VALUE;
 

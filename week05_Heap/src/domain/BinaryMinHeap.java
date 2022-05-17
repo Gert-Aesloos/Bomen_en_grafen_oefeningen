@@ -19,8 +19,7 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     public E getMin() {
         if (this.isEmpty())
             throw new IllegalStateException("Kan niet zoeken in een lege heap");
-        //TO DO zie oefening 3
-        return null;
+        return this.values.get(0);
     }
 
     public boolean addValue(E value) {
@@ -36,7 +35,13 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     }
 
     private void bubbleUp() {
-        //TO DO : oefening 4
+        int index=values.size()-1;
+        while (index>=1 && values.get((index-1)/2).compareTo(values.get(index)) > 0){
+            E i=this.values.get(index);
+            this.values.set(index,values.get((index-1)/2));
+            this.values.set((index-1)/2,i);
+            index=(index-1)/2;
+        }
     }
 
     public E removeSmallest() {
@@ -50,11 +55,57 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     }
 
     private void bubbleDown() {
-        // TODO zie oefening 5
+        int index=0;
+        while (true){
+            int indexLeftChild=(2*index)+1;
+            int indexRightChild=(2*index)+2;
+            int indexSmallest;
+            E valuesSmallest;
+
+            if (indexLeftChild<this.values.size() && indexRightChild<this.values.size()){
+                if (this.values.get(indexLeftChild).compareTo(this.values.get(indexRightChild))<0){
+                    indexSmallest=indexLeftChild;
+                    valuesSmallest=this.values.get(indexLeftChild);
+                }
+                else {
+                    indexSmallest=indexRightChild;
+                    valuesSmallest=this.values.get(indexRightChild);
+                }
+            }
+
+            else if (indexLeftChild<this.values.size()){
+                indexSmallest=indexLeftChild;
+                valuesSmallest=this.values.get(indexLeftChild);
+            }
+
+            else {
+                break;
+            }
+            if (this.values.get(index).compareTo(this.values.get(indexSmallest))>0){
+                E i = this.values.get(index);
+                this.values.set(index, this.values.get(indexSmallest));
+                this.values.set(indexSmallest, i);
+                index=indexSmallest;
+            }
+            else {
+                break;
+            }
+        }
     }
 
     public ArrayList<E> getPath(E value) {
-        // TODO zie oefening 6;
-        return null;
+        int index= values.indexOf(value);
+        if (!values.contains(value)){
+            return null;
+        }
+        else {
+            ArrayList<E> i=new ArrayList<>();
+            i.add(value);
+            while (index >0){
+                index=(index-1)/2;
+                i.add(0, this.values.get(index));
+            }
+            return i;
+        }
     }
 }
