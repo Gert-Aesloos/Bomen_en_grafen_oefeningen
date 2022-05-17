@@ -58,6 +58,7 @@ public class WeightedGraph {
                 res.addAll(getShortestPath(tussenstation,j,pointer));
             }
         }
+
 		return res;
 	}
 
